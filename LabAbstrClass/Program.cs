@@ -1,8 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
+using System.Runtime.InteropServices;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using System.DirectoryServices.AccountManagement;
 
 namespace LabAbstrClass
 {
@@ -33,7 +39,16 @@ namespace LabAbstrClass
 
         public override bool IsDatabaseAccessible(string connectionString)
         {
-            throw new NotImplementedException();
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                return true;
+            }
+            catch(SqlException)
+            {
+                return false;
+            }
         }
 
         public override bool IsDateValid(string date)
@@ -56,21 +71,37 @@ namespace LabAbstrClass
             throw new NotImplementedException();
         }
 
+        /* Что должен делать метод? */
         public override bool IsUserExists(string login, string password)
         {
-            throw new NotImplementedException();
+            using(PrincipalContext principalContext = new PrincipalContext(ContextType.Machine))
+            {
+                return principalContext.ValidateCredentials(login, password);
+            }
         }
 
         public override bool IsUserRoot()
         {
-            throw new NotImplementedException();
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
 
         public override bool IsWebPageAvailable(string url)
         {
-            throw new NotImplementedException();
+            WebClient webClient = new WebClient();
+            try
+            {
+                webClient.OpenRead(url);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
+        /* Что должен делать метод? */
         public override void Log()
         {
             throw new NotImplementedException();
@@ -81,6 +112,9 @@ namespace LabAbstrClass
     {
         static void Main(string[] args)
         {
+            MyValidator validator = new MyValidator();
+            Console.WriteLine(validator.IsUserExists("naught", ""));
+            Console.ReadKey();
         }
     }
 }

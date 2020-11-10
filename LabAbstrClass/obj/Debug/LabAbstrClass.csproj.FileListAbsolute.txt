@@ -1,0 +1,6 @@
+C:\Users\naught\Documents\Учеба\4 курс\Инструментальные средства разработки ПО\projects\LabAbstrClass\LabAbstrClass\bin\Debug\LabAbstrClass.exe.config
+C:\Users\naught\Documents\Учеба\4 курс\Инструментальные средства разработки ПО\projects\LabAbstrClass\LabAbstrClass\bin\Debug\LabAbstrClass.exe
+C:\Users\naught\Documents\Учеба\4 курс\Инструментальные средства разработки ПО\projects\LabAbstrClass\LabAbstrClass\bin\Debug\LabAbstrClass.pdb
+C:\Users\naught\Documents\Учеба\4 курс\Инструментальные средства разработки ПО\projects\LabAbstrClass\LabAbstrClass\obj\Debug\LabAbstrClass.csprojAssemblyReference.cache
+C:\Users\naught\Documents\Учеба\4 курс\Инструментальные средства разработки ПО\projects\LabAbstrClass\LabAbstrClass\obj\Debug\LabAbstrClass.exe
+C:\Users\naught\Documents\Учеба\4 курс\Инструментальные средства разработки ПО\projects\LabAbstrClass\LabAbstrClass\obj\Debug\LabAbstrClass.pdb
