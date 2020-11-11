@@ -16,7 +16,7 @@ namespace LabAbstrClass
     {
         public abstract bool IsPasswordValid(string password);
         public abstract string HashPassword(string password);
-        public abstract bool IsUserExists(string login, string password);
+        public abstract bool IsUserExists(string login);
         public abstract bool IsEmailValid(string email);
         public abstract bool IsPhoneValid(string phone);
         public abstract bool IsWebPageAvailable(string url);
@@ -71,12 +71,15 @@ namespace LabAbstrClass
             throw new NotImplementedException();
         }
 
-        /* Что должен делать метод? */
-        public override bool IsUserExists(string login, string password)
+        public override bool IsUserExists(string login)
         {
-            using(PrincipalContext principalContext = new PrincipalContext(ContextType.Machine))
+            using (PrincipalContext principalContext = new PrincipalContext(ContextType.Machine))
             {
-                return principalContext.ValidateCredentials(login, password);
+                UserPrincipal userPrincipal = UserPrincipal.FindByIdentity(
+                        principalContext,
+                        login
+                    );
+                return userPrincipal != null;
             }
         }
 
@@ -101,7 +104,7 @@ namespace LabAbstrClass
             }
         }
 
-        /* Что должен делать метод? */
+        /* Пока не реализовывать */
         public override void Log()
         {
             throw new NotImplementedException();
@@ -113,7 +116,7 @@ namespace LabAbstrClass
         static void Main(string[] args)
         {
             MyValidator validator = new MyValidator();
-            Console.WriteLine(validator.IsUserExists("naught", ""));
+            Console.WriteLine(validator.IsUserExists("jack"));
             Console.ReadKey();
         }
     }
